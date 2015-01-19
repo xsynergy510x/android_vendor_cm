@@ -139,16 +139,9 @@ PRODUCT_PACKAGES += \
 
 # Custom CM packages
 PRODUCT_PACKAGES += \
-    Launcher3 \
-    Trebuchet \
     AudioFX \
-    CMWallpapers \
-    CMFileManager \
     Eleven \
-    LockClock \
-    CMUpdater \
     CMAccount \
-    CMHome \
     CyanogenSetupWizard
 
 # CM Platform Library
