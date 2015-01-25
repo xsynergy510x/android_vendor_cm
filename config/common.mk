@@ -143,6 +143,7 @@ PRODUCT_PACKAGES += \
     AudioFX \
     Eleven \
     CMAccount \
+    CyanogenSetupWizard
 
 # CM Hardware Abstraction Framework
 PRODUCT_PACKAGES += \
