@@ -136,7 +136,6 @@ PRODUCT_PACKAGES += \
 
 # Custom CM packages
 PRODUCT_PACKAGES += \
-    Launcher3 \
     AudioFX \
     Eleven \
     CMAccount \
