@@ -261,6 +261,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_PACKAGE_OVERLAYS += vendor/cm/overlay/common
 
+# SuperSU files
+PRODUCT_COPY_FILES += \
+    vendor/slim/prebuilt/common/UPDATE-SuperSU.zip:install/UPDATE-SuperSU.zip \
+    vendor/slim/prebuilt/common/etc/init.d/99SuperSUDaemon:system/etc/init.d/99SuperSUDaemon
+
 PRODUCT_VERSION_MAJOR = 12
 PRODUCT_VERSION_MINOR = 1
 PRODUCT_VERSION_MAINTENANCE = 0-RC0
