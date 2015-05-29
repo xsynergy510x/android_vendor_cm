@@ -233,6 +233,10 @@ PRODUCT_PACKAGES += \
     su
 endif
 
+# Install custom /system format sript
+PRODUCT_COPY_FILES += \
+    vendor/cm/f2fs/system_format.sh:install/f2fs/system_format.sh
+
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.root_access=0
 
