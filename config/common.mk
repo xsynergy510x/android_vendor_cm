@@ -112,6 +112,10 @@ PRODUCT_COPY_FILES += \
     vendor/cm/prebuilt/common/etc/init.d/00banner:system/etc/init.d/00banner \
     vendor/cm/prebuilt/common/bin/sysinit:system/bin/sysinit
 
+# fstrim on boot
+PRODUCT_COPY_FILES += \
+    vendor/cm/prebuilt/common/etc/init.d/10fstrim:system/etc/init.d/10fstrim
+
 ifneq ($(TARGET_BUILD_VARIANT),user)
 # userinit support
 PRODUCT_COPY_FILES += \
