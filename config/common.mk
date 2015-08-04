@@ -116,6 +116,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     vendor/cm/prebuilt/common/etc/init.d/10fstrim:system/etc/init.d/10fstrim
 
+# Vacuum and index sqlite databases on boot
+PRODUCT_COPY_FILES += \
+    vendor/cm/prebuilt/common/etc/init.d/11sqlite3:system/etc/init.d/11sqlite3
+
 ifneq ($(TARGET_BUILD_VARIANT),user)
 # userinit support
 PRODUCT_COPY_FILES += \
