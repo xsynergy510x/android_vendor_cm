@@ -8,6 +8,12 @@ function trim() {
     # Mount system
     $LOGCAT "Mounting /system";
     busybox mount -o remount,rw /system;
+	
+	# Check if log dir exists
+	if [ ! -d /system/etc/logs ]; then
+		$LOGCAT "/system/etc/logs not found! Creating dir...";
+		mkdir -p /system/etc/logs;
+	fi
 
     # Create log file
     $LOGCAT "Creating new LOG file";
@@ -54,3 +60,4 @@ function trim() {
 
 $LOGCAT "Running /system/etc/10fstrim...";
 trim &
+
