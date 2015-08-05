@@ -12,7 +12,7 @@ function sqlite3() {
 	# Check if log dir exists
 	if [ ! -d /system/etc/logs ]; then
 		$LOGCAT "/system/etc/logs not found! Creating dir...";
-		mkdir -p /system/etc/logs;
+		busybox mkdir -p /system/etc/logs;
 	fi
 	
     	# Create log file
