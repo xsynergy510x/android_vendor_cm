@@ -5,57 +5,57 @@ LOGCAT="log -p i -t fstrim"
 LOG=/system/etc/logs/10fstrim.log
 
 function trim() {
-    # Mount system
-    $LOGCAT "Mounting /system";
-    busybox mount -o remount,rw /system;
+    	# Mount system
+    	$LOGCAT "Mounting /system";
+    	busybox mount -o remount,rw /system;
 	
 	# Check if log dir exists
 	if [ ! -d /system/etc/logs ]; then
 		$LOGCAT "/system/etc/logs not found! Creating dir...";
-		mkdir -p /system/etc/logs;
+		busybox mkdir -p /system/etc/logs;
 	fi
 
-    # Create log file
-    $LOGCAT "Creating new LOG file";
-    busybox date > $LOG;
+    	# Create log file
+    	$LOGCAT "Creating new LOG file";
+    	busybox date > $LOG;
 
-    if [ ! -e $LOG ]; then
-        $LOGCAT "Error: Unable to create logfile!"
-        exit 1;
-    fi
+    	if [ ! -e $LOG ]; then
+        	$LOGCAT "Error: Unable to create logfile!"
+        	exit 1;
+    	fi
 
 	$LOGCAT "Beginning 1 minute delay..."
-    sleep 60;
+    	sleep 60;
 	$LOGCAT "Executing TRIM!"
 
-    # TRIM /system, if not F2FS
-    if ! busybox mount | grep \/system | grep f2fs; then
-        $LOGCAT "Trimming /system...";
-        busybox fstrim -v /system 2>&1 | tee -a $LOG;
-    else
-        $LOGCAT "Unable to trim /system";
-        busybox echo "/system formatted as F2FS, TRIM not available!" | tee -a $LOG;
-    fi
+    	# TRIM /system, if not F2FS
+    	if ! busybox mount | grep \/system | grep f2fs; then
+    	    	$LOGCAT "Trimming /system...";
+    		busybox fstrim -v /system 2>&1 | tee -a $LOG;
+    	else
+        	$LOGCAT "Unable to trim /system";
+        	busybox echo "/system formatted as F2FS, TRIM not available!" | tee -a $LOG;
+    	fi
 
-    # TRIM /data, if not F2FS
-    if ! busybox mount | grep \/data | grep f2fs; then
-        $LOGCAT "Trimming /data...";
-        busybox fstrim -v /data 2>&1 | tee -a $LOG;
-    else
-        $LOGCAT "Unable to trim /data";
-        busybox echo "/data formatted as F2FS, TRIM not available!" | tee -a $LOG;
-    fi
+    	# TRIM /data, if not F2FS
+    	if ! busybox mount | grep \/data | grep f2fs; then
+        	$LOGCAT "Trimming /data...";
+        	busybox fstrim -v /data 2>&1 | tee -a $LOG;
+    	else
+        	$LOGCAT "Unable to trim /data";
+        	busybox echo "/data formatted as F2FS, TRIM not available!" | tee -a $LOG;
+    	fi
 
-    # TRIM /cache, if not F2FS
-    if ! busybox mount | grep \/cache | grep f2fs; then
-        $LOGCAT "Trimming /cache...";
-        busybox fstrim -v /cache 2>&1 | tee -a $LOG;
-    else
-        $LOGCAT "Unable to trim /cache";
-        busybox echo "/cache formatted as F2FS, TRIM not available!" | tee -a $LOG;
-    fi
+    	# TRIM /cache, if not F2FS
+   	if ! busybox mount | grep \/cache | grep f2fs; then
+        	$LOGCAT "Trimming /cache...";
+        	busybox fstrim -v /cache 2>&1 | tee -a $LOG;
+    	else
+        	$LOGCAT "Unable to trim /cache";
+        	busybox echo "/cache formatted as F2FS, TRIM not available!" | tee -a $LOG;
+    	fi
 
-    $LOGCAT "/system/etc/10fstrim complete!";
+    	$LOGCAT "/system/etc/10fstrim complete!";
 }
 
 $LOGCAT "Running /system/etc/10fstrim...";
