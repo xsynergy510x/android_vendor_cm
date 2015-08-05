@@ -11,8 +11,7 @@ function sqlite3() {
 
 	# Check if log dir exists
 	if [ ! -d /system/etc/logs ]; then
-		$LOGCAT "/system/etc/logs not found! Creating dir...";
-		busybox mkdir -p /system/etc/logs;
+		$LOGCAT "Error: /system/etc/logs not found!";
 	fi
 	
     	# Create log file
@@ -22,7 +21,6 @@ function sqlite3() {
 	# Check if logfile was created properly
 	if [ ! -e $LOG ]; then
     	    $LOGCAT "Error: Unable to create logfile!"
-    	    exit 1;
     	fi
 	
 	$LOGCAT "Beginning 1 minute delay..."

@@ -11,8 +11,7 @@ function trim() {
 	
 	# Check if log dir exists
 	if [ ! -d /system/etc/logs ]; then
-		$LOGCAT "/system/etc/logs not found! Creating dir...";
-		busybox mkdir -p /system/etc/logs;
+		$LOGCAT "Error: /system/etc/logs dir not found!";
 	fi
 
     	# Create log file
@@ -21,7 +20,6 @@ function trim() {
 
     	if [ ! -e $LOG ]; then
         	$LOGCAT "Error: Unable to create logfile!"
-        	exit 1;
     	fi
 
 	$LOGCAT "Beginning 1 minute delay..."
@@ -60,4 +58,3 @@ function trim() {
 
 $LOGCAT "Running /system/etc/10fstrim...";
 trim &
-
