@@ -107,6 +107,14 @@ endif
 PRODUCT_COPY_FILES += \
     vendor/cm/prebuilt/common/bin/otasigcheck.sh:install/bin/otasigcheck.sh
 
+# fstrim on boot
+PRODUCT_COPY_FILES += \
+    vendor/cm/prebuilt/common/bin/boot_trim:system/bin/boot_trim
+
+# Vacuum and index sqlite databases on boot
+PRODUCT_COPY_FILES += \
+    vendor/cm/prebuilt/common/bin/boot_sqlite3:system/bin/boot_sqlite3
+
 # init.d support
 PRODUCT_COPY_FILES += \
     vendor/cm/prebuilt/common/etc/init.d/00banner:system/etc/init.d/00banner \
@@ -115,14 +123,6 @@ PRODUCT_COPY_FILES += \
 # README for logs directory
 PRODUCT_COPY_FILES += \
     vendor/cm/prebuilt/common/etc/logs/README:system/etc/logs/README.txt
-
-# fstrim on boot
-PRODUCT_COPY_FILES += \
-    vendor/cm/prebuilt/common/etc/init.d/10fstrim:system/etc/init.d/10fstrim
-
-# Vacuum and index sqlite databases on boot
-PRODUCT_COPY_FILES += \
-    vendor/cm/prebuilt/common/etc/init.d/11sqlite3:system/etc/init.d/11sqlite3
 
 ifneq ($(TARGET_BUILD_VARIANT),user)
 # userinit support
