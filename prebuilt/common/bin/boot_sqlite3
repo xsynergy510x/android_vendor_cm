@@ -1,13 +1,13 @@
 #!/system/bin/sh
 # Vacuum and reindex sqlite databases on boot
 
-LOGCAT="log -p i -t sqlite3"
-LOG=/system/etc/logs/11sqlite3.log
+LOGCAT="log -p i -t boot_sqlite3"
+LOG=/system/etc/logs/boot_sqlite3.log
 
 function sqlite3() {
 	# Mount system
     	$LOGCAT "Mounting /system";
-    	busybox mount -o remount,rw /system;
+    	mount -o remount,rw /system;
 
 	# Check if log dir exists
 	if [ ! -d /system/etc/logs ]; then
@@ -16,7 +16,7 @@ function sqlite3() {
 	
     	# Create log file
     	$LOGCAT "Creating new LOG file";
-    	busybox date > $LOG;
+    	date > $LOG;
 	
 	# Check if logfile was created properly
 	if [ ! -e $LOG ]; then
@@ -27,33 +27,33 @@ function sqlite3() {
 	sleep 60;
 	$LOGCAT "Executing SQlite3!"
 	
-	busybox echo "Beginning /data optimization" | tee -a $LOG
+	echo "Beginning /data optimization" | tee -a $LOG
 	x=0;
 	for i in \
-	`busybox find /data -iname "*.db"`;
+	`find /data -iname "*.db"`;
 	do \
 		/system/xbin/sqlite3 $i 'VACUUM;' | tee -a $LOG;
 		/system/xbin/sqlite3 $i 'REINDEX;' | tee -a $LOG;
 		x=$((x+1));
 	done;
 	$LOGCAT "Optimized $x /data databases";
-	busybox echo "Optimized $x /data databases" | tee -a $LOG
-	busybox echo " " | tee -a $LOG
+	echo "Optimized $x /data databases" | tee -a $LOG
+	echo " " | tee -a $LOG
 	
-	busybox echo "Beginning /sdcard optimization" | tee -a $LOG
+	echo "Beginning /sdcard optimization" | tee -a $LOG
 	x=0;
 	for i in \
-	`busybox find /sdcard -iname "*.db"`;
+	`find /sdcard -iname "*.db"`;
 	do \
 		/system/xbin/sqlite3 $i 'VACUUM;' | tee -a $LOG;
 		/system/xbin/sqlite3 $i 'REINDEX;' | tee -a $LOG;
 		x=$((x+1));
 	done;
 	$LOGCAT "Optimized $x /sdcard databases";
-	busybox echo "Optimized $x /sdcard databases" | tee -a $LOG
+	echo "Optimized $x /sdcard databases" | tee -a $LOG
 
 	$LOGCAT "/system/etc/11sqlite3 complete!";
-	busybox echo "SQlite3 optimization complete!" | tee -a $LOG
+	echo "SQlite3 optimization complete!" | tee -a $LOG
 }
 
 $LOGCAT "Running /system/etc/11sqlite3...";
