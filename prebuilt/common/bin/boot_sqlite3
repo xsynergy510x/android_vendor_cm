@@ -4,15 +4,10 @@
 LOGCAT="log -p i -t boot_sqlite3"
 LOG=/data/local/logs/boot_sqlite3.log
 
-function log() {
-	$LOGCAT $1
-	echo $1 | tee -a $LOG
-}
-
 function sqlite3() {
 	# Check if log dir exists
-	if [ ! -d /system/etc/logs ]; then
-		$LOGCAT "Error: /system/etc/logs not found!";
+	if [ ! -d /data/local/logs ]; then
+		$LOGCAT "Error: /data/local/logs not found!"
 		mkdir -p /data/local/logs
 		SUCCESS=$?
 		if [[ $SUCCESS != 0 ]]; then
@@ -20,59 +15,66 @@ function sqlite3() {
 		fi
 	fi
 	
-    	# Create log file
+    	# Create LOGCAT file
     	date > $LOG;
-    	$log "Creating new LOG file";
+    	$LOGCAT "Creating new LOG file"
 	
-	# Check if logfile was created properly
+	# Check if LOGCATfile was created properly
 	if [ ! -e $LOG ]; then
-    	    $LOGCAT "Error: Unable to create logfile!"
+    		$LOGCAT "Error: Unable to create log file!"
+	else
+		echo "Creating new LOG file" | tee -a $LOG
     	fi
 	
-	$log "Executing SQlite3!"
+	$LOGCAT "Executing SQlite3!"
+	echo "Executing SQlite3!" | tee -a $LOG
 	
-	$log "Beginning /data optimization"
+	$LOGCAT "Beginning /data optimization"
+	echo "Beginning /data optimization" | tee -a $LOG
 	COUNT=0;
 	for i in \
 	`find /data -iname "*.db"`;
 	do \
-		/system/xbin/sqlite3 $i 'VACUUM;' | tee -a $LOG;
+		echo "Optimizing $i" | tee -a $LOG
+		/system/xbin/sqlite3 $i 'VACUUM;'
 		SUCCESS=$?
 		if [[ $SUCCESS != 0 ]]; then
-			$log "Couldn't vaccuum $i";
+			echo "Couldn't vaccuum $i" | tee -a $LOG
 		fi
-		/system/xbin/sqlite3 $i 'REINDEX;' | tee -a $LOG;
+		/system/xbin/sqlite3 $i 'REINDEX;'
 		SUCCESS=$?
 		if [[ $SUCCESS != 0 ]]; then
-			$log "Couldn't re-index $i";
+			echo "Couldn't re-index $i" | tee -a $LOG
 		fi
-		$log "Optimized $i";
 		COUNT=$((COUNT+1));
 	done;
-	$log "Optimized $COUNT /data databases";
+	$LOGCAT "Optimized $COUNT /data databases"
+	echo "Optimized $COUNT /data databases" | tee -a $LOG
 	
-	$log "Beginning /sdcard optimization";
+	$LOGCAT "Beginning /sdcard optimization"
+	echo "\nBeginning /sdcard optimization" | tee -a $LOG
 	COUNT=0;
 	for i in \
 	`find /sdcard -iname "*.db"`;
 	do \
-		/system/xbin/sqlite3 $i 'VACUUM;' | tee -a $LOG;
+		echo "Optimized $i" | tee -a $LOG
+		/system/xbin/sqlite3 $i 'VACUUM;'
 		SUCCESS=$?
                 if [[ $SUCCESS != 0 ]]; then
-                        $log "Couldn't vaccuum $i";
+                        echo "Couldn't vaccuum $i" | tee -a $LOG
                 fi
-		/system/xbin/sqlite3 $i 'REINDEX;' | tee -a $LOG;
+		/system/xbin/sqlite3 $i 'REINDEX;'
 		SUCCESS=$?
                 if [[ $SUCCESS != 0 ]]; then
-                        $log "Couldn't re-index $i";
+                        echo "Couldn't re-index $i" | tee -a $LOG
                 fi
-		$log "Optimized $i";
 		COUNT=$((COUNT+1));
 	done;
-	$log "Optimized $COUNT /sdcard databases";
+	$LOGCAT "Optimized $COUNT /sdcard databases"
+	echo "Optimized $COUNT /sdcard databases\n" | tee -a $LOG
 
-	$log "SQlite3 optimization complete!";
+	$LOGCAT "SQlite3 optimization complete!"
 }
 
-$log "Running boot_sqlite3...";
-su -c sqlite3 &
+$LOGCAT "Running boot_sqlite3..."
+sqlite3 &
