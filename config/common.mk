@@ -174,7 +174,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     Launcher3 \
     Trebuchet \
-    AudioFX \
+    ViPER4Android \
     CMWallpapers \
     CMFileManager \
     Eleven \
