@@ -88,7 +88,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.facelock.use_intro_anim=false \
     dalvik.vm.profiler=1 \
     dalvik.vm.image-dex2oat-filter=everything \
-    dalvik.vm.dex2oat-filter=everything
+    dalvik.vm.dex2oat-filter=everything \
+    dalvik.vm.dex2oat-flags=--no-watch-dog
 
 # Copy over the changelog to the device
 PRODUCT_COPY_FILES += \
