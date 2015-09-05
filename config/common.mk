@@ -183,8 +183,8 @@ PRODUCT_PACKAGES += \
 
 # Custom APKs
 PRODUCT_COPY_FILES += \
-    vendor/cm/apks/AdAway-release_Build-Apr.09.2015.apk:system/app/AdAway/AdAway.apk \
-    vendor/cm/apks/NovaLauncher_4.0.1.apk:system/priv-app/NovaLauncher/NovaLauncher.apk
+    vendor/cm/apks/AdAway-release_Build-Sep.01.2015.apk:system/app/AdAway/AdAway.apk \
+    vendor/cm/apks/NovaLauncher_4.0.2.apk:system/priv-app/NovaLauncher/NovaLauncher.apk
 
 # CM Platform Library
 PRODUCT_PACKAGES += \
