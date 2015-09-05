@@ -115,6 +115,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     vendor/cm/prebuilt/common/bin/boot_sqlite3:system/bin/boot_sqlite3
 
+# Bulletproof apps / Set OOM to -17 for certain apps
+PRODUCT_COPY_FILES += \
+    vendor/cm/prebuilt/common/bin/bulletproof_apps:system/bin/bulletproof_apps
+
 # init.d support
 PRODUCT_COPY_FILES += \
     vendor/cm/prebuilt/common/etc/init.d/00banner:system/etc/init.d/00banner \

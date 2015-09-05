@@ -1,0 +1,54 @@
+#!/system/bin/sh
+# Set OOM priority for certain apps to make them Bulletproof
+# Taken from zeppelinrox's Bulletproof script
+# Source: http://forum.xda-developers.com/showthread.php?t=1012330
+
+LOGCAT="log -p i -t bulletproof"
+LOG=/data/local/logs/bulletproof_apps.log
+
+# List apps
+GOOGLE_CAMERA="com.google.android.GoogleCamera"
+GOOGLE_MESSENGER="com.google.android.apps.messaging"
+
+# Bulletproof function
+function bp() {
+	echo "-17" > /proc/$1/oom_adj
+}
+
+# Delay between restarts
+sleep 60
+
+$LOGCAT "Bulletproofing apps..."
+
+# Check if log dir exists
+if [ ! -d /data/local/logs ]; then
+	$LOGCAT "Error: /data/local/logs not found!"
+	mkdir -p /data/local/logs
+	SUCCESS=$?
+	if [[ $SUCCESS != 0 ]]; then
+		$LOGCAT "Error: Unable to create /data/local/logs!"
+	fi
+fi
+# Check if LOGCATfile was created properly
+if [ ! -e $LOG ]; then
+	$LOGCAT "Error: Unable to create log file!"
+else
+	date > $LOG
+	echo "Creating new LOG file" | tee -a $LOG
+fi
+
+PPID=$(pidof $GOOGLE_MESSENGER)
+if [[ $PPID != 1 ]]; then
+	$bp $PPID
+	$LOGCAT "$GOOGLE_MESSENGER OOM adjusted"
+	echo "OOM set for $GOOGLE_MESSENGER" | tee -a $LOG
+fi
+
+PPID=$(pidof $GOOGLE_CAMERA)
+if [[ $PPID != 1 ]]; then
+        $bp $PPID
+	$LOGCAT "$GOOGLE_CAMERA OOM adjusted"
+        echo "OOM set for $GOOGLE_CAMERA" | tee -a $LOG
+fi
+
+$LOGCAT "Bulletproofing complete!"
