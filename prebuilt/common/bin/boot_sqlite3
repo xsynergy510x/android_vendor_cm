@@ -76,5 +76,6 @@ function sqlite3() {
 	$LOGCAT "SQlite3 optimization complete!"
 }
 
+sleep 60
 $LOGCAT "Running boot_sqlite3..."
-sqlite3 &
+sqlite3

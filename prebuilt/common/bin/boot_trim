@@ -83,4 +83,4 @@ function trim() {
 }
 
 $LOGCAT "Running boot_trim..." | tee -a $LOG
-trim &
+trim
