@@ -182,10 +182,9 @@ PRODUCT_PACKAGES += \
     CMHome \
     CyanogenSetupWizard
 
-# Custom APKs
+# Add AdAway
 PRODUCT_COPY_FILES += \
-    vendor/cm/apks/AdAway-release_Build-Sep.01.2015.apk:system/app/AdAway/AdAway.apk \
-    vendor/cm/apks/NovaLauncher_4.0.2.apk:system/priv-app/NovaLauncher/NovaLauncher.apk
+    vendor/cm/apks/AdAway-release_Build-Sep.01.2015.apk:system/app/AdAway/AdAway.apk
 
 # CM Platform Library
 PRODUCT_PACKAGES += \
