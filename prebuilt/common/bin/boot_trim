@@ -4,83 +4,60 @@
 LOGCAT="log -p i -t boot_trim"
 LOG=/data/local/logs/boot_trim.log
 
-function trim() {
-	# Check if log dir exists
-	if [ ! -d /data/local/logs ]; then
-		$LOGCAT "Error: /data/local/logs dir not found!"
-		mkdir -p /data/local/logs
-		SUCCESS=$?
-		if [[ $SUCCESS != 0 ]]; then
-			$LOGCAT "Error: Unable to create /data/local/logs"
-		fi
+$LOGCAT "Running boot_trim..."
+
+# Check if log dir exists
+if [ ! -d /data/local/logs ]; then
+	$LOGCAT "Error: /data/local/logs dir not found!"
+	mkdir -p /data/local/logs
+	SUCCESS=$?
+	if [[ $SUCCESS != 0 ]]; then
+		$LOGCAT "Error: Unable to create /data/local/logs"
 	fi
+fi
 
-    	# Create LOGCAT file
-    	date > $LOG;
-    	$LOGCAT "Creating new LOG file"
+# Create log file
+date > $LOG;
 
-    	if [ ! -e $LOG ]; then
-        	$LOGCAT "Error: Unable to create log file!"
-	else
-		echo "Creating new LOG file" | tee -a $LOG
-    	fi
+if [ ! -e $LOG ]; then
+	$LOGCAT "Error: Unable to create log file!"
+else
+	$LOGCAT "Creating new LOG file"
+fi
 
-	$LOGCAT "Executing TRIM!"
-	echo "Executing TRIM!" | tee -a $LOG
+$LOGCAT "Executing TRIM!"
+echo "Executing TRIM!" | tee -a $LOG
 
-    	# TRIM /system, if not F2FS
-    	if ! mount | grep \/system | grep f2fs; then
-    	    	$LOGCAT "Trimming /system..."
-		echo "Trimming /system..." | tee -a $LOG
-    		fstrim -v /system 2>&1 | tee -a $LOG;
-		SUCCESS=$?
-		if [[ $SUCCESS == 0 ]]; then
-			$LOGCAT "Trimmed /system!"
-		else
-			$LOGCAT "Error: Unable to trim /system!"
-			echo "Error: Unable to trim /system!" | tee -a $LOG
-		fi
-    	else
-        	$LOGCAT "/system formatted as F2FS, TRIM not available!"
-		echo "/system formatted as F2FS, TRIM not available!" | tee -a $LOG
-    	fi
+$LOGCAT "Trimming /system..."
+fstrim -v /system 2>&1 | tee -a $LOG;
+SUCCESS=$?
+if [[ $SUCCESS == 0 ]]; then
+	$LOGCAT "Trimmed /system!"
+else
+	$LOGCAT "Error: Unable to trim /system!"
+	echo "Error: Unable to trim /system!" | tee -a $LOG
+fi
+    	
+$LOGCAT "Trimming /data..."
+echo "Trimming /data..." | tee -a $LOG
+fstrim -v /data 2>&1 | tee -a $LOG;
+SUCCESS=$?
+if [[ $SUCCESS == 0 ]]; then
+	$LOGCAT "Trimmed /data!"
+else
+	$LOGCAT "Error: Unable to trim /data!"
+	echo "Error: Unable to trim /data!" | tee -a $LOG
+fi
 
-    	# TRIM /data, if not F2FS
-    	if ! mount | grep \/data | grep f2fs; then
-        	$LOGCAT "Trimming /data..."
-		echo "Trimming /data..." | tee -a $LOG
-        	fstrim -v /data 2>&1 | tee -a $LOG;
-		SUCCESS=$?
-                if [[ $SUCCESS == 0 ]]; then
-                        $LOGCAT "Trimmed /data!"
-                else
-                        $LOGCAT "Error: Unable to trim /data!"
-			echo "Error: Unable to trim /data!" | tee -a $LOG
-                fi
-    	else
-        	$LOGCAT "/data formatted as F2FS, TRIM not available!"
-		echo "/data formatted as F2FS, TRIM not available!" | tee -a $LOG
-    	fi
+$LOGCAT "Trimming /cache..."
+echo "Trimming /cache..." | tee -a $LOG
+fstrim -v /cache 2>&1 | tee -a $LOG;
+SUCCESS=$?
+if [[ $SUCCESS == 0 ]]; then
+	$LOGCAT "Trimmed /cache!"
+else
+	$LOGCAT "Error: Unable to trim /cache!"
+	echo "Error: Unable to trim /cache!" | tee -a $LOG
+fi
 
-    	# TRIM /cache, if not F2FS
-   	if ! mount | grep \/cache | grep f2fs; then
-        	$LOGCAT "Trimming /cache..."
-		echo "Trimming /cache..." | tee -a $LOG
-        	fstrim -v /cache 2>&1 | tee -a $LOG;
-		SUCCESS=$?
-                if [[ $SUCCESS == 0 ]]; then
-                        $LOGCAT "Trimmed /cache!"
-                else
-                        $LOGCAT "Error: Unable to trim /cache!"
-			echo "Error: Unable to trim /cache!" | tee -a $LOG
-                fi
-    	else
-        	$LOGCAT "/cache formatted as F2FS, TRIM not available!"
-		echo "/cache formatted as F2FS, TRIM not available!" | tee -a $LOG
-    	fi
-
-    	$LOGCAT "boot_trim complete!"
-}
-
-$LOGCAT "Running boot_trim..." | tee -a $LOG
-trim
+$LOGCAT "boot_trim complete!"
