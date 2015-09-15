@@ -110,6 +110,18 @@ endif
 PRODUCT_COPY_FILES += \
     vendor/cm/prebuilt/common/bin/otasigcheck.sh:install/bin/otasigcheck.sh
 
+# fstrim on boot
+PRODUCT_COPY_FILES += \
+    vendor/cm/prebuilt/common/bin/boot_trim:system/bin/boot_trim
+
+# Vacuum and index sqlite databases on boot
+PRODUCT_COPY_FILES += \
+    vendor/cm/prebuilt/common/bin/boot_sqlite3:system/bin/boot_sqlite3
+
+# Custom boot LED pattern
+PRODUCT_COPY_FILES += \
+    vendor/cm/prebuilt/common/bin/google_leds:system/bin/google_leds
+
 # init.d support
 PRODUCT_COPY_FILES += \
     vendor/cm/prebuilt/common/etc/init.d/00banner:system/etc/init.d/00banner \
