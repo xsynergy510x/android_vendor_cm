@@ -168,7 +168,8 @@ PRODUCT_PACKAGES += \
     CMUpdater \
     CMAccount \
     CMHome \
-    CyanogenSetupWizard
+    CyanogenSetupWizard \
+    CMSettingsProvider
 
 # Add AdAway
 PRODUCT_COPY_FILES += \
