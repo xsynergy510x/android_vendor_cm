@@ -171,7 +171,7 @@ PRODUCT_PACKAGES += \
 
 # Add AdAway
 PRODUCT_COPY_FILES += \
-    vendor/cm/apks/AdAway-release_Build-Sep.01.2015.apk:system/app/AdAway/AdAway.apk
+    vendor/cm/apks/AdAway-release_Build-Oct.09.2015.apk:system/app/AdAway/AdAway.apk
 
 # CM Platform Library
 PRODUCT_PACKAGES += \
