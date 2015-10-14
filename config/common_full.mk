@@ -7,6 +7,7 @@ include vendor/cm/config/cm_audio.mk
 # Optional CM packages
 PRODUCT_PACKAGES += \
     Email \
+    UnifiedEmail \
     Galaxy4 \
     HoloSpiralWallpaper \
     LiveWallpapers \
