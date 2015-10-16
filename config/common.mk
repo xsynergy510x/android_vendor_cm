@@ -171,10 +171,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     vendor/cm/prebuilt/common/apks/AdAway-release_Build-Oct.09.2015.apk:system/app/AdAway/AdAway.apk
 
-# AOSP Bookmark Sync Adapter
-PRODUCT_COPY_FILES += \
-    vendor/cm/prebuilt/common/apks/BookmarksSyncAdapter.apk:system/priv-app/BookmarksSyncAdapter/BookmarksSyncAdapter.apk
-
 # CM Platform Library
 PRODUCT_PACKAGES += \
     org.cyanogenmod.platform-res \
