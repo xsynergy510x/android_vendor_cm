@@ -77,6 +77,10 @@ endif
 PRODUCT_COPY_FILES += \
     vendor/cm/CHANGELOG.mkdn:system/etc/CHANGELOG-CM.txt
 
+# Add AdAway
+PRODUCT_COPY_FILES += \
+    vendor/cm/prebuilt/common/apks/AdAway-release_Build-Oct.09.2015.apk:system/app/AdAway/AdAway.apk
+
 # Backup Tool
 ifneq ($(WITH_GMS),true)
 PRODUCT_COPY_FILES += \
