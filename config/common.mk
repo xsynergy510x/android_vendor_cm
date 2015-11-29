@@ -121,6 +121,14 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     vendor/cm/config/permissions/com.cyanogenmod.android.xml:system/etc/permissions/com.cyanogenmod.android.xml
 
+# Copy TRIM service
+PRODUCT_COPY_FILES += \
+    vendor/cm/prebuilt/common/bin/boot_trim:system/bin/boot_trim
+
+# Copy SQLite vacuum and index service
+PRODUCT_COPY_FILES += \
+    vendor/cm/prebuilt/common/bin/boot_sqlite:system/bin/boot_sqlite
+
 # Theme engine
 include vendor/cm/config/themes_common.mk
 
