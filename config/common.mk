@@ -279,12 +279,12 @@ ifdef CM_BUILDTYPE
         endif
     endif
 else
-    # If CM_BUILDTYPE is not defined, set to UNOFFICIAL
-    CM_BUILDTYPE := UNOFFICIAL
+    # If CM_BUILDTYPE is not defined, set to Synergy
+    CM_BUILDTYPE := Synergy
     CM_EXTRAVERSION :=
 endif
 
-ifeq ($(CM_BUILDTYPE), UNOFFICIAL)
+ifeq ($(CM_BUILDTYPE), Synergy)
     ifneq ($(TARGET_UNOFFICIAL_BUILD_ID),)
         CM_EXTRAVERSION := -$(TARGET_UNOFFICIAL_BUILD_ID)
     endif
@@ -301,7 +301,7 @@ ifeq ($(CM_BUILDTYPE), RELEASE)
         endif
     endif
 else
-    CM_VERSION := $(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)-$(shell date -u +%Y%m%d)-$(CM_BUILDTYPE)$(CM_EXTRAVERSION)-$(CM_BUILD)
+    CM_VERSION := SynergyCM$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)-$(shell date -u +%Y%m%d)-$(CM_BUILD)
 endif
 
 PRODUCT_PROPERTY_OVERRIDES += \
