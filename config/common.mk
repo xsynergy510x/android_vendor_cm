@@ -300,7 +300,7 @@ ifeq ($(CM_BUILDTYPE), RELEASE)
         endif
     endif
 else
-    CM_VERSION := SynergyCM$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)-$(shell date -u +%Y%m%d)-$(CM_BUILD)
+    CM_VERSION := SynergyCM$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)-$(shell date +%Y%m%d)-$(CM_BUILD)
 endif
 
 PRODUCT_PROPERTY_OVERRIDES += \
