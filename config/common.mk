@@ -105,6 +105,10 @@ PRODUCT_COPY_FILES += \
     vendor/cm/prebuilt/common/etc/init.d/90userinit:system/etc/init.d/90userinit
 endif
 
+# Temporary busybox for V4A
+PRODUCT_COPY_FILES += \
+    vendor/cm/prebuilt/common/etc/init.d/95viper:system/etc/init.d/95viper
+
 # CM-specific init file
 PRODUCT_COPY_FILES += \
     vendor/cm/prebuilt/common/etc/init.local.rc:root/init.cm.rc
