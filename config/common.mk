@@ -144,6 +144,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     vendor/cm/prebuilt/common/bin/boot_sqlite:system/bin/boot_sqlite
 
+# Live lockscreen
+PRODUCT_COPY_FILES += \
+    vendor/cm/config/permissions/org.cyanogenmod.livelockscreen.xml:system/etc/permissions/org.cyanogenmod.livelockscreen.xml
+
 # Theme engine
 include vendor/cm/config/themes_common.mk
 
