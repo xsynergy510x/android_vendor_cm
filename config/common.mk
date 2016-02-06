@@ -159,7 +159,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     Launcher3 \
     Trebuchet \
-    ViPER4Android \
+    AudioFX \
     CMFileManager \
     Eleven \
     LockClock \
